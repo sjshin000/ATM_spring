@@ -20,8 +20,8 @@ public class AccountRepository {
 	}
 
 	public int updateAccountBalance(Account account) {
-		throw new RuntimeException("====================test=======");
-		//int count = sqlSession.update("account.updateAccountBalance", account);
-		//return count;
+//		throw new RuntimeException("====================test=======");
+		int count = sqlSession.update("account.updateAccountBalance", account);
+		return count;
 	}
 }

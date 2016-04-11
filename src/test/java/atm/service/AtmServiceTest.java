@@ -28,7 +28,8 @@ public class AtmServiceTest {
 	AtmService atmService;
 	@Autowired
 	AtmController atmController;
-
+	@Autowired
+	Withdrawal withdrawalService;
 
 //	@Before
 //	public void initialize() {
@@ -48,7 +49,7 @@ public class AtmServiceTest {
 		atmSlot.setAtmBalance(400);
 		account.setAccountNumber(12345);
 
-		Map<String, Object> result = atmService.withdraw(account, withdrawalAmount);
+		Map<String, Object> result = withdrawalService.withdraw(account, withdrawalAmount);
 		assertThat(false, equalTo((Boolean)result.get("resultKey")));
 
 		Account accountResult = (Account)result.get("accountKey");
@@ -69,7 +70,7 @@ public class AtmServiceTest {
 		atmSlot.setAtmBalance(200);
 		account.setAccountNumber(12345);
 
-		Map<String, Object> result = atmService.withdraw(account, withdrawalAmount);
+		Map<String, Object> result = withdrawalService.withdraw(account, withdrawalAmount);
 		assertThat(false, equalTo((Boolean)result.get("resultKey")));
 
 		Account accountResult = (Account)result.get("accountKey");
@@ -89,7 +90,7 @@ public class AtmServiceTest {
 		atmSlot.setAtmBalance(500);
 		account.setAccountNumber(12345);
 
-		Map<String, Object> result = atmService.withdraw(account, withdrawalAmount);
+		Map<String, Object> result = withdrawalService.withdraw(account, withdrawalAmount);
 		assertThat(true, equalTo((Boolean)result.get("resultKey")));
 
 		Account accountResult = (Account)result.get("accountKey");
@@ -116,7 +117,7 @@ public class AtmServiceTest {
 		//atmController.withdraw(account, withdrawalAmount);
 		Map<String, Object> result = new HashMap<String, Object>();
 //		try{
-			result = atmService.withdraw(account, withdrawalAmount);
+			result = withdrawalService.withdraw(account, withdrawalAmount);
 //		} catch (Exception e){
 //
 //		}

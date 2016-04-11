@@ -5,6 +5,7 @@ import atm.model.bank.Account;
 import atm.model.bank.Banking;
 import atm.service.AtmService;
 import atm.service.Deposit;
+import atm.service.Withdrawal;
 import atm.view.Keypad;
 import atm.view.Screen;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AtmController {
 
 	@Autowired
 	Deposit depositService;
+
+	@Autowired
+	Withdrawal withdrawalService;
 
 
 	//ATM 실행기 흐름 제어 (다른 일반 메소드에서는 흐름을 제어하지 않도록 작업)
@@ -82,7 +86,6 @@ public class AtmController {
 		print(CODE_106.getMessage());
 		int depositAmount = input();
 
-//		Map<String, Object> depositResult = atmService.deposit(account, depositAmount);
 		Map<String, Object> depositResult = depositService.deposit(account, depositAmount);
 		if(true == (Boolean) depositResult.get("resultKey")) {
 			print(CODE_016.getMessage());
@@ -101,7 +104,7 @@ public class AtmController {
 		int withdrawalAmount = input();
 
 		try {
-			Map<String, Object> withdrawResult = atmService.withdraw(account, withdrawalAmount);
+			Map<String, Object> withdrawResult = withdrawalService.withdraw(account, withdrawalAmount);
 			if(false == (Boolean) withdrawResult.get("resultKey")) {
 				//print(CODE_013.getMessage());
 				result = withdrawResult;
@@ -216,7 +219,6 @@ public class AtmController {
 		System.out.println("==account 3 : " + account1.getAccountBalance());
 		return result;
 	}
-
 
 
 

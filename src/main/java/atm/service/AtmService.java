@@ -1,7 +1,6 @@
 package atm.service;
 
 import atm.controller.AtmController;
-import atm.model.AtmSlot;
 import atm.model.bank.Account;
 import atm.model.bank.Banking;
 import atm.repository.AccountRepository;
@@ -9,12 +8,10 @@ import atm.repository.BankingRepository;
 import atm.view.Screen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static atm.view.MessageCode.*;
 /**
  * Created by sjshin on 2016-03-24.
  * 은행 거래 실행하기
@@ -68,91 +65,4 @@ public class AtmService {
 		return bankingList;
 	}
 
-	//잔액조회
-	public void balanceInquiry(Account account) {
-//		bankApi.inquireDeposit(account);
-
-	}
-
-//	//예금
-//	@Transactional
-//	public Map<String, Object> deposit(Account account, int depositAmount) {
-//		Map<String, Object> result = new HashMap<String, Object>();
-//		AtmSlot atmSlot = new AtmSlot();
-//		Banking banking = new Banking();
-//
-//		banking.setAccountNumber(account.getAccountNumber());
-//		banking.setDepositAmount(depositAmount);
-//		banking.setAccountBalance(account.getAccountBalance() + depositAmount);
-//		bankingRepository.insertDeposit(banking);
-//
-//		account.setAccountBalance(account.getAccountBalance() + depositAmount);
-//		accountRepository.updateAccountBalance(account);
-//
-//		atmSlot.setAtmBalance(atmSlot.getAtmBalance() + depositAmount);
-//
-//		result.put("accountKey", account);
-//		result.put("bankingKey", banking);
-//		result.put("atmSlotKey", atmSlot);
-//		result.put("resultKey", true);
-//
-//		return result;
-//	}
-
-	//출금
-	@Transactional
-	public Map<String, Object> withdraw(Account account, int withdrawalAmount) {
-		Map<String, Object> result = new HashMap<String, Object>();
-		AtmSlot atmSlot = new AtmSlot();
-
-		//고객잔고와 출금요청금액 비교
-		if(withdrawalAmount > account.getAccountBalance()) {
-			result.put("resultKey", false);
-			result.put("accountKey", account);
-			result.put("messageKey", CODE_013.getMessage());
-			return result;
-		}
-
-		if(withdrawalAmount > atmSlot.getAtmBalance()) {
-			result.put("resultKey", false);
-			result.put("accountKey", account);
-			result.put("messageKey", CODE_014.getMessage());
-			return result;
-		}
-
-//		try {
-			Banking bankingResult = bankingSet(account, withdrawalAmount);
-
-			Account accountResult = accountSet(account, withdrawalAmount);
-
-
-			atmSlot.setAtmBalance(atmSlot.getAtmBalance() - withdrawalAmount);
-			result.put("accountKey", accountResult);
-			result.put("bankingKey", bankingResult);
-			result.put("atmSlotKey", atmSlot);
-			result.put("resultKey", true);
-//			return result;
-//		} catch (Exception e) {
-//			result.put("resultKey", false);
-//			result.put("accountKey", account);
-//			result.put("messageKey", CODE_002.getMessage() );
-//		}
-
-		return result;
-	}
-
-	private Account accountSet(Account account, int withdrawalAmount) {
-		account.setAccountBalance(account.getAccountBalance() - withdrawalAmount);
-		accountRepository.updateAccountBalance(account);
-		return account;
-	}
-
-	private Banking bankingSet(Account account, int withdrawalAmount) {
-		Banking banking = new Banking();
-		banking.setAccountNumber(account.getAccountNumber());
-		banking.setWithdrawalAmount(withdrawalAmount);
-		banking.setAccountBalance(account.getAccountBalance() - withdrawalAmount);
-		bankingRepository.insertWithdraw(banking);
-		return banking;
-	}
 }

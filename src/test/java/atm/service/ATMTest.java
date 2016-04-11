@@ -2,7 +2,6 @@ package atm.service;
 
 import atm.controller.AtmController;
 import atm.model.bank.Account;
-import atm.repository.TestRepository;
 import atm.view.Screen;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,14 +25,6 @@ public class ATMTest {
 	AtmService atmService;
 	@Autowired
 	AtmController atmController;
-
-	@Autowired
-	TestRepository testRepository;
-
-	@Test
-	public void test_mybatis() {
-		testRepository.selectTest();
-	}
 
 	@Test
 	public void test_01_계좌번호입력자리수5개_true() {
@@ -85,7 +76,6 @@ public class ATMTest {
 		assertThat(String.valueOf(true), (Boolean)result.get("resultKey"));
 		System.out.println(Screen.ANSI_PURPLE+"result 4 : " + result.get("resultKey"));
 	}
-
 
 
 	@Test
