@@ -3,7 +3,7 @@ package atm.controller;
 import atm.model.AtmSlot;
 import atm.model.bank.Account;
 import atm.model.bank.Banking;
-import atm.service.AtmService;
+import atm.service.AccountValidation;
 import atm.service.Deposit;
 import atm.service.Withdrawal;
 import atm.view.Keypad;
@@ -23,7 +23,7 @@ import static atm.view.MessageCode.*;
 @Controller
 public class AtmController {
 	@Autowired
-	AtmService atmService;
+	AccountValidation atmService;
 
 	@Autowired
 	Deposit depositService;

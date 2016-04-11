@@ -2,6 +2,7 @@ package atm.service;
 
 import atm.model.bank.Account;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -10,5 +11,6 @@ import java.util.Map;
  */
 @Service
 public interface Withdrawal {
-	public Map<String, Object> withdraw(Account account, int withdrawalAmount);
+	@Transactional
+	Map<String, Object> withdraw(Account account, int withdrawalAmount);
 }

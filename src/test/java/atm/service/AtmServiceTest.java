@@ -25,7 +25,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @ContextConfiguration({ "classpath:/spring/expert.xml" })
 public class AtmServiceTest {
 	@Autowired
-	AtmService atmService;
+	AccountValidation atmService;
 	@Autowired
 	AtmController atmController;
 	@Autowired
@@ -136,24 +136,4 @@ public class AtmServiceTest {
 
 		assertThat("입금/출금이 정상처리 되지 않았습니다. 다시 메뉴를 선택해 주세요.", equalTo((String)result.get("messageKey")));
 	}
-	//	@Test
-	//	public void test_01_예금금테스트() {
-	//		Account account = new Account();
-	//		Banking banking = new Banking();
-	//		AtmSlot atmSlot = new AtmSlot();
-	//		int DepositAmount = 300;
-	//		account.setAccountBalance(200);
-	//		atmSlot.setAtmBalance(400);
-	//		account.setAccountNumber(12345);
-	//
-	//		Map<String, Object> result = atmService.deposit(account, DepositAmount);
-	//		assertThat(true, equalTo((Boolean)result.get("resultKey")));
-	//
-	//		//고객잔액에 예금금액이 추가되었는지
-	//		System.out.println(Screen.ANSI_PURPLE +"고객잔액 : " + account.getAccountBalance() + Screen.ANSI_RESET);
-	//		assertThat(500, equalTo(account.getAccountBalance()));
-	//
-	//		System.out.println(Screen.ANSI_PURPLE +"atm 잔액 3 : " + atmSlot.getAtmBalance() + Screen.ANSI_RESET);
-	//		assertThat(700, equalTo(atmSlot.getAtmBalance()));
-	//	}
 }

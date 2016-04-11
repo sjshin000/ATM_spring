@@ -8,7 +8,6 @@ import atm.repository.BankingRepository;
 import atm.view.Screen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class DepositService implements Deposit{
 	@Autowired
 	AccountRepository accountRepository;
 
-	@Transactional("transactionManager")
+//	@Transactional("transactionManager")
 	public Map<String, Object> deposit(Account account, int depositAmount) {
 		System.out.println(Screen.ANSI_PURPLE +"==========================deposit 메소드진입==========="+Screen.ANSI_RESET);
 		Map<String, Object> result = new HashMap<String, Object>();

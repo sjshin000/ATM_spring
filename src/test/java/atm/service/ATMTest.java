@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 @ContextConfiguration({ "classpath:/spring/expert.xml" })
 public class ATMTest {
 	@Autowired
-	AtmService atmService;
+	AccountValidation accountValidation;
 	@Autowired
 	AtmController atmController;
 
@@ -36,7 +36,7 @@ public class ATMTest {
 		Account account = new Account();
 		account.setAccountNumber(inputData);
 
-		Boolean result = atmService.validData(account);
+		Boolean result = accountValidation.validData(account);
 		assertThat(true, equalTo(result));
 		System.out.println(Screen.ANSI_PURPLE+"result 1 : " + result);
 	}
@@ -48,7 +48,7 @@ public class ATMTest {
 		Account account = new Account();
 		account.setAccountNumber(inputData);
 
-		Boolean result = atmService.validData(account);
+		Boolean result = accountValidation.validData(account);
 
 		assertThat(false, equalTo(result));
 		System.out.println(Screen.ANSI_PURPLE+"result 2 : " + result);
@@ -61,7 +61,7 @@ public class ATMTest {
 		Account account = new Account();
 		account.setAccountNumber(inputData);
 
-		Boolean result = atmService.validData(account);
+		Boolean result = accountValidation.validData(account);
 		assertThat(false, equalTo(result));
 		System.out.println(Screen.ANSI_PURPLE+"result 3 : " + result);
 	}
@@ -72,7 +72,7 @@ public class ATMTest {
 		account.setAccountNumber(12345);
 		account.setAccoutPwd(1234);
 
-		Map<String, Object> result = atmService.validAccount(account);
+		Map<String, Object> result = accountValidation.validAccount(account);
 		assertThat(String.valueOf(true), (Boolean)result.get("resultKey"));
 		System.out.println(Screen.ANSI_PURPLE+"result 4 : " + result.get("resultKey"));
 	}
@@ -84,7 +84,7 @@ public class ATMTest {
 		account.setAccountNumber(12344);
 		account.setAccoutPwd(1234);
 
-		Map<String, Object> result = atmService.validAccount(account);
+		Map<String, Object> result = accountValidation.validAccount(account);
 		assertThat(String.valueOf(false), (Boolean)result.get("resultKey"));
 
 		System.out.println(Screen.ANSI_PURPLE+"result 5 : " + result.get("resultKey"));
@@ -96,7 +96,7 @@ public class ATMTest {
 		account.setAccountNumber(12345);
 		account.setAccoutPwd(1233);
 
-		Map<String, Object> result = atmService.validAccount(account);
+		Map<String, Object> result = accountValidation.validAccount(account);
 		assertThat(String.valueOf(false), (Boolean)result.get("resultKey"));
 
 		System.out.println(Screen.ANSI_PURPLE+"result 6 : " + result.get("resultKey"));

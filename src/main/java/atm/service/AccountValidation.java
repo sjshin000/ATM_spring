@@ -1,6 +1,5 @@
 package atm.service;
 
-import atm.controller.AtmController;
 import atm.model.bank.Account;
 import atm.model.bank.Banking;
 import atm.repository.AccountRepository;
@@ -20,9 +19,7 @@ import java.util.Map;
  * ATM을 사용자는 다음과 같은 이벤트 순서를 경험할 것이다.
  */
 @Service
-public class AtmService {
-	@Autowired
-	AtmController atmController;
+public class AccountValidation {
 	@Autowired
 	AccountRepository accountRepository;
 	@Autowired

@@ -46,7 +46,4 @@ public class AtmDipositTest {
 		System.out.println(Screen.ANSI_PURPLE +"atm 잔액 3 : " + atmSlot.getAtmBalance() + Screen.ANSI_RESET);
 		assertThat(700, equalTo(atmSlot.getAtmBalance()));
 	}
-
-
-
 }

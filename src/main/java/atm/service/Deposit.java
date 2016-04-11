@@ -1,6 +1,7 @@
 package atm.service;
 
 import atm.model.bank.Account;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -10,6 +11,6 @@ import java.util.Map;
 //@Transactional
 public interface Deposit {
 	//예금
-//	@Transactional
+	@Transactional
 	Map<String, Object> deposit(Account account, int depositAmount);
 }

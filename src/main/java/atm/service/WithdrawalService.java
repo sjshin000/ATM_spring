@@ -7,7 +7,6 @@ import atm.repository.AccountRepository;
 import atm.repository.BankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,6 @@ public class WithdrawalService implements Withdrawal {
 	@Autowired
 	BankingRepository bankingRepository;
 
-	@Transactional
 	public Map<String, Object> withdraw(Account account, int withdrawalAmount) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		AtmSlot atmSlot = new AtmSlot();
