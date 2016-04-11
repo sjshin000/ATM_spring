@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="account">
+
+    <select id="select" parameterType = "int" resultType="atm.model.bank.Account">
+    <![CDATA[
+       SELECT
+       userNumber
+       , userName
+       , bankName
+       , accountNumber
+       , accoutPwd
+       , accountBalance
+       FROM
+       account
+       WHERE
+       accountNumber = #{accountNumber}
+
+	]]>
+    </select>
+
+    <update id="updateAccountBalance" parameterType = "atm.model.bank.Account">
+        <![CDATA[
+       UPDATE account SET
+       accountBalance = #{accountBalance}
+       WHERE
+       accountNumber = #{accountNumber}
+	]]>
+    </update>
+
+
+</mapper>

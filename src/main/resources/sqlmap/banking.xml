@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="banking">
+
+    <select id="selectList" parameterType = "int" resultType="atm.model.bank.Banking">
+    <![CDATA[
+       SELECT
+       `number`
+       , accountNumber
+       , depositAmount
+       , withdrawalAmount
+       , accountBalance
+       , `date`
+       FROM
+       banking
+       WHERE
+       accountNumber = #{accountNumber}
+	]]>
+    </select>
+
+    <insert id="insertWithdraw" parameterType="atm.model.bank.Banking">
+    <![CDATA[
+      INSERT INTO banking (
+        number
+        , accountNumber
+        , depositAmount
+        , withdrawalAmount
+        , accountBalance
+        , `date`
+      ) VALUES (
+        #{number}
+        , #{accountNumber}
+        , 0
+        , #{withdrawalAmount}
+        , #{accountBalance}
+        , NOW()
+      )
+    ]]>
+    </insert>
+
+    <insert id="insertDeposit" parameterType="atm.model.bank.Banking">
+        <![CDATA[
+      INSERT INTO banking (
+        number
+        , accountNumber
+        , depositAmount
+        , withdrawalAmount
+        , accountBalance
+        , `date`
+      ) VALUES (
+        #{number}
+        , #{accountNumber}
+        , #{depositAmount}
+        , 0
+        , #{accountBalance}
+        , NOW()
+      )
+    ]]>
+    </insert>
+
+</mapper>
