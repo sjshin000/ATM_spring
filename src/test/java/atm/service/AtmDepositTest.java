@@ -21,10 +21,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:/spring/expert.xml" })
-public class AtmDipositTest {
+public class AtmDepositTest {
 
 	@Autowired
-	DepositService depositService;
+	Deposit depositService;
 
 	@Test
 	public void test_02_예금금테스트_인터페이스분리후() {

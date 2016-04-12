@@ -38,7 +38,7 @@ public class ATMTest {
 
 		Boolean result = accountValidation.validData(account);
 		assertThat(true, equalTo(result));
-		System.out.println(Screen.ANSI_PURPLE+"result 1 : " + result);
+		System.out.println(Screen.ANSI_PURPLE + "result 1 : " + result + Screen.ANSI_RESET);
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class ATMTest {
 		Boolean result = accountValidation.validData(account);
 
 		assertThat(false, equalTo(result));
-		System.out.println(Screen.ANSI_PURPLE+"result 2 : " + result);
+		System.out.println(Screen.ANSI_PURPLE + "result 2 : " + result + Screen.ANSI_RESET);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class ATMTest {
 
 		Boolean result = accountValidation.validData(account);
 		assertThat(false, equalTo(result));
-		System.out.println(Screen.ANSI_PURPLE+"result 3 : " + result);
+		System.out.println(Screen.ANSI_PURPLE + "result 3 : " + result);
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class ATMTest {
 
 		Map<String, Object> result = accountValidation.validAccount(account);
 		assertThat(String.valueOf(true), (Boolean)result.get("resultKey"));
-		System.out.println(Screen.ANSI_PURPLE+"result 4 : " + result.get("resultKey"));
+		System.out.println(Screen.ANSI_PURPLE + "result 4 : " + result.get("resultKey") + Screen.ANSI_RESET);
 	}
 
 
@@ -85,9 +85,10 @@ public class ATMTest {
 		account.setAccoutPwd(1234);
 
 		Map<String, Object> result = accountValidation.validAccount(account);
-		assertThat(String.valueOf(false), (Boolean)result.get("resultKey"));
+//		assertThat(String.valueOf(false), (Boolean)result.get("resultKey"));
+		assertThat(false, equalTo(result.get("resultKey")));
 
-		System.out.println(Screen.ANSI_PURPLE+"result 5 : " + result.get("resultKey"));
+		System.out.println(Screen.ANSI_PURPLE + "result 5 : " + result.get("resultKey") + Screen.ANSI_RESET);
 	}
 
 	@Test
@@ -97,8 +98,8 @@ public class ATMTest {
 		account.setAccoutPwd(1233);
 
 		Map<String, Object> result = accountValidation.validAccount(account);
-		assertThat(String.valueOf(false), (Boolean)result.get("resultKey"));
-
-		System.out.println(Screen.ANSI_PURPLE+"result 6 : " + result.get("resultKey"));
+//		assertThat(String.valueOf(false), (Boolean)result.get("resultKey"));
+		assertThat(false, equalTo(result.get("resultKey")));
+		System.out.println(Screen.ANSI_PURPLE + "result 6 : " + result.get("resultKey") + Screen.ANSI_RESET);
 	}
 }

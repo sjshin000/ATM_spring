@@ -41,6 +41,13 @@ public class AccountValidation {
 		Account bankAccount = accountRepository.selectAccount(account.getAccountNumber());
 		System.out.println("3-3 account === " + bankAccount.getAccountBalance());
 
+		if(null == bankAccount) {
+			result.put("resultKey", false);
+			result.put("accountKey", account);
+
+			return result;
+		}
+
 		if(account.getAccountNumber() == bankAccount.getAccountNumber() && account.getAccoutPwd() == bankAccount.getAccoutPwd()) {
 			System.out.println(Screen.ANSI_PURPLE+"account : " + account.getAccountNumber());
 			System.out.println(Screen.ANSI_PURPLE+"pwd : " + account.getAccoutPwd());
