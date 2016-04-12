@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/batch
+        http://www.springframework.org/schema/batch/spring-batch.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+
+    <!--been component-scan  설정-->
+    <!--<context:component-scan base-package="atm.*"/>-->
+    <import resource="classpath:/spring/expert.xml" />
+
+    <batch:job id="batchJob" restartable="true" job-repository="jobRepository" >
+        <batch:step id="step">
+            <batch:tasklet >
+                <batch:chunk reader="itemReader" writer = "itemWriter" commit-interval="1" />
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+
+    <bean id="itemReader" class="atm.batch.BatchReader"/>
+    <bean id="itemWriter" class="atm.batch.BatchWriter"/>
+
+    <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+
+    <bean id="jobLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+    </bean>
+
+</beans>
